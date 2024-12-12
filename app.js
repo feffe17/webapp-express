@@ -9,7 +9,7 @@ server.get('/', (req, res) => {
     res.send(`Server is up and running!`);
 })
 
-server.use('/api/movies', router)
+server.use('/movies', router)
 
 
 server.listen(port, () => {
