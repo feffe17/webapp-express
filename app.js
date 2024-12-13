@@ -5,6 +5,8 @@ const port = "3005"
 const cors = require('cors');
 const router = require('./routes/movieRoutes')
 
+server.use(cors())
+
 server.get('/', (req, res) => {
     res.send(`Server is up and running!`);
 })
