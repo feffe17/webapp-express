@@ -6,6 +6,8 @@ const cors = require('cors');
 const router = require('./routes/movieRoutes')
 
 server.use(cors())
+server.use(express.json())
+
 
 server.get('/', (req, res) => {
     res.send(`Server is up and running!`);

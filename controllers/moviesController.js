@@ -31,9 +31,30 @@ function show(req, res) {
     })
 }
 
+function storeReview(req, res) {
+    const { movie_id, text, name, vote } = req.body;
+
+    if (!movie_id || !text || !name || !vote) {
+        return res.status(400).json({ error: 'Missing required fields: movie_id, text, name, vote' });
+    }
+
+    const query = `INSERT INTO reviews (movie_id, text, name, vote, created_at, updated_at) VALUES (?, ?, ?, ?, NOW(), NOW())`;
+
+    connection.query(query, [movie_id, text, name, vote], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err });
+        }
+
+        res.status(201).json({
+            message: 'Review added successfully',
+            review_id: results.insertId,
+        });
+    });
+}
 
 
 module.exports = {
     index,
-    show
-}
+    show,
+    storeReview
+};
